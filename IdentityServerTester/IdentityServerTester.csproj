@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
-    <CodeAnalysisRuleSet>Tester.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>..\WebIdentityServer\WebIdentityServer.ruleset</CodeAnalysisRuleSet>
     <UserSecretsId>a1b09d43-1687-41a6-b7c2-5e3e55d701e7</UserSecretsId>
   </PropertyGroup>
 
