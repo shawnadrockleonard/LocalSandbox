@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Net;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Primitives;
-using Microsoft.WindowsAzure.Storage;
-using Microsoft.WindowsAzure.Storage.Queue;
-using Microsoft.WindowsAzure.Storage.Table;
 using Serilog.Context;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using System.Net;
 
 namespace IdentityServerTester.Helpers
 {
@@ -98,65 +93,6 @@ namespace IdentityServerTester.Helpers
             var uri = new Uri(vaultUrl);
 
             LogDestinationIPs(configSectionKey, uri);
-        }
-
-        public static void LogDestinationIpFromSqlConnectionString(IConfiguration configuration, string connectionStringKey)
-        {
-            if (configuration == null)
-            {
-                throw new ArgumentException("can't be null", nameof(configuration));
-            }
-
-            var sqlConnectionString = configuration.GetConnectionString(connectionStringKey);
-            var sqlConnectionStringBuilder = new SqlConnectionStringBuilder(sqlConnectionString);
-            var hostName = sqlConnectionStringBuilder.DataSource.Split('\\').First().Split(',').First().Split(':').Last();
-
-            if (hostName.Equals(".", StringComparison.OrdinalIgnoreCase) || hostName.Equals("localhost", StringComparison.OrdinalIgnoreCase) || hostName.Equals("(localdb)", StringComparison.OrdinalIgnoreCase))
-            {
-                // host is NOT remote, skip
-                return;
-            }
-
-            LogDestinationIPs(connectionStringKey, hostName);
-        }
-
-        /// <summary>
-        /// Unable to test this method due to static class method CloudStorageAccount.TryParse
-        /// </summary>
-        [ExcludeFromCodeCoverage]
-        [SuppressMessage("Minor Code Smell", "S4018:Generic methods should provide type parameters", Justification = "using generics to compare using typeof()")]
-        public static void LogDestinationIpFromCloudStorageConnectionString<T>(IConfiguration configuration, string connectionStringKey)
-        {
-            if (configuration == null)
-            {
-                throw new ArgumentException("can't be null", nameof(configuration));
-            }
-
-            var connectionString = configuration.GetConnectionString(connectionStringKey);
-
-            // an environment is missing connectionString skip audit log.
-            if (string.IsNullOrEmpty(connectionString))
-            {
-                return;
-            }
-
-            CloudStorageAccount.TryParse(connectionString, out var cloudStorageAccount);
-            Uri uri;
-
-            if (typeof(T) == typeof(CloudTable))
-            {
-                uri = cloudStorageAccount.TableEndpoint;
-            }
-            else if (typeof(T) == typeof(CloudQueue))
-            {
-                uri = cloudStorageAccount.QueueEndpoint;
-            }
-            else
-            {
-                throw new ArgumentException($"Type is not supported '{typeof(T)}'");
-            }
-
-            LogDestinationIPs(connectionStringKey, uri);
         }
 
         private static void LogForType(LogEntry logEntry)

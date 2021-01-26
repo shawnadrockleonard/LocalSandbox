@@ -1,8 +1,8 @@
-﻿using System.Diagnostics;
+﻿using IdentityServerTester.Helpers;
 using IdentityServerTester.Models;
-using IdentityServer4.Extensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 
 namespace IdentityServerTester.Controllers
 {
@@ -10,8 +10,13 @@ namespace IdentityServerTester.Controllers
     {
         public IActionResult Index()
         {
-            var username = HttpContext.User?.GetDisplayName();
-
+            var username = HttpContext.User?.Identity?.Name;
+            LogHelper.Log(new LogEntry
+            {
+                Operation = "TestController/Get",
+                Type = LogEntryType.Debug,
+                OperationProperties = new[] { "hello", username }
+            }, HttpContext);
             return View();
         }
 

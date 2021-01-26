@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using IdentityServerTester.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -16,6 +13,12 @@ namespace IdentityServerTester.Controllers
         public IActionResult Get()
         {
             var user = HttpContext.User;
+            LogHelper.Log(new LogEntry
+            {
+                Operation = "TestController/Get",
+                Type = LogEntryType.Debug,
+                OperationProperties = new[] { "hello", user.Identity?.Name }
+            }, HttpContext);
             return Ok("Success");
         }
     }
