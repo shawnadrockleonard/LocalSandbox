@@ -256,3 +256,6 @@ Thumbs.db
 /angular/coverage
 *.orig
 
+
+*.cer
+*.crt

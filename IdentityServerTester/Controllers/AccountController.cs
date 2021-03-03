@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.WsFederation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -10,11 +11,11 @@ namespace IdentityServerTester.Controllers
     [Route("[controller]/[action]")]
     public class AccountController : Controller
     {
-        private readonly ILogger _logger;
+        private ILogger ilogger { get; }
 
         public AccountController(ILogger<AccountController> logger)
         {
-            _logger = logger;
+            ilogger = logger;
         }
 
         [HttpGet]
@@ -24,8 +25,8 @@ namespace IdentityServerTester.Controllers
             var redirectUrl = Url.Content("~/");
             var challenge = Challenge(
                 new AuthenticationProperties { RedirectUri = redirectUrl },
-                "oidc"
-                //WsFederationDefaults.AuthenticationScheme
+                //"oidc"
+                WsFederationDefaults.AuthenticationScheme
                 );
             return challenge;
         }
@@ -37,8 +38,8 @@ namespace IdentityServerTester.Controllers
             var redirectUrl = Url.Content("~/");
             return SignOut(
                 new AuthenticationProperties { RedirectUri = redirectUrl },
-                "oidc"
-                //WsFederationDefaults.AuthenticationScheme
+                //"oidc"
+                WsFederationDefaults.AuthenticationScheme
                 );
         }
     }
