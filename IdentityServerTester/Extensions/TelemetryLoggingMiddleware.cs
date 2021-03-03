@@ -25,6 +25,11 @@ namespace IdentityServerTester.Extensions
                 throw new ArgumentNullException(nameof(context));
             }
 
+            await InvokeLogAsync(context);
+        }
+
+        public async Task InvokeLogAsync(HttpContext context)
+        {
             var displayUrl = context.Request.GetDisplayUrl().Split('?')?[0];
 
             LogHelper.Log(new LogEntry

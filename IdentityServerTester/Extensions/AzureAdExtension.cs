@@ -29,17 +29,7 @@ namespace IdentityServerTester.Extensions
             //    {
             //        OnTokenValidated = async context =>
             //        {
-            //            var accessToken = context.SecurityToken;
-            //            var client = new HttpClient();
-            //            var discovery = await client.GetDiscoveryDocumentAsync(options.Authority);
-            //            if (discovery.IsError) throw new Exception(discovery.Error);
 
-
-            //            var userInfoResponse = await client.GetUserInfoAsync(new UserInfoRequest
-            //            {
-            //                Address = discovery.UserInfoEndpoint,
-            //                Token = accessToken.RawData
-            //            });
 
             //            if (context.Principal.Identity is ClaimsIdentity identity)
             //            {

@@ -9,8 +9,6 @@ using System.Net;
 
 namespace IdentityServerTester.Helpers
 {
-    [SuppressMessage("Critical Code Smell", "S2360:Optional parameters should not be used", Justification = "simple optional logic")]
-    [SuppressMessage("Critical Code Smell", "S1541:Methods and properties should not be too complex", Justification = "conditional blocks are required")]
     public static class LogHelper
     {
         const string RoleTypeName = "FederationTester";

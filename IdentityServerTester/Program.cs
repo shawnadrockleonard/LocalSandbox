@@ -24,13 +24,6 @@ namespace IdentityServerTester
                 .ConfigureKestrel((context, options) =>
                 {
                     /* Set properties and call methods on options */
-
-                    //options.Listen(IPAddress.Loopback, 44358, listenOptions =>
-                    //{
-                    //    // Configure SSL
-                    //    var serverCertificate = ReadCertificate("D61977118A763F4BB30E5919929F727FA9336C06");
-                    //    listenOptions.UseHttps(serverCertificate);
-                    //});
                 })
                 .UseSerilog()
                 .Build();
