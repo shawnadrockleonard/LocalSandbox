@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29306.81
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityServerTester", "IdentityServerTester\IdentityServerTester.csproj", "{46CE23BA-B3E1-4CED-9BA1-A34F4E229255}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentitySaml", "IdentitySaml\IdentitySaml.csproj", "{46CE23BA-B3E1-4CED-9BA1-A34F4E229255}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,6 +20,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {56932E82-C7F1-4363-AA76-AB61629AEF7E}
+		SolutionGuid = {A2AE88A4-55FC-41B2-AA2B-177F22E59CF5}
 	EndGlobalSection
 EndGlobal
