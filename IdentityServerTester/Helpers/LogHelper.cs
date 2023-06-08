@@ -95,14 +95,15 @@ namespace IdentityServerTester.Helpers
 
         private static void LogForType(LogEntry logEntry)
         {
+            if (logEntry == null)
+            {
+                throw new ArgumentNullException(nameof(logEntry));
+            }
+
             var msg = $"{RoleTypeName} => {logEntry?.Operation}";
+
             switch (logEntry.Type)
             {
-                case LogEntryType.Info:
-                case LogEntryType.Audit:
-                case LogEntryType.Telemetry:
-                    Serilog.Log.Information(msg);
-                    break;
                 case LogEntryType.Debug:
                     Serilog.Log.Debug(msg);
                     break;

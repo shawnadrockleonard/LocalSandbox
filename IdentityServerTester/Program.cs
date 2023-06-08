@@ -17,16 +17,18 @@ namespace IdentityServerTester
 
         public static IWebHost BuildWebHost(string[] args)
         {
-            return WebHost.CreateDefaultBuilder(args)
+            var builder = WebHost.CreateDefaultBuilder(args)
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
                 .UseStartup<Startup>()
                 .ConfigureKestrel((context, options) =>
                 {
                     /* Set properties and call methods on options */
-                })
-                .UseSerilog()
-                .Build();
+                });
+
+            builder.UseSerilog();
+
+            return builder.Build();
         }
 
         private static X509Certificate2 ReadCertificate(string certificateThumbprint)

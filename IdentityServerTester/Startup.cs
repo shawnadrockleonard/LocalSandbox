@@ -87,7 +87,7 @@ namespace IdentityServerTester
                 services.AddOpenId(Configuration);
             }
 
-            services.AddMvc().SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_3_0);
+            services.AddMvc();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -107,6 +107,8 @@ namespace IdentityServerTester
 
             app.UseRouting();
             app.UseAuthorization();
+
+            
 
             // enable serilog
             app.UseTelemetryLoggingMiddleware();
